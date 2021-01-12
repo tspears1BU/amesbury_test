@@ -49,7 +49,6 @@
     "normalize-scss": "^7.0.1"
   },
   "scripts": {
-    "postinstall": "grunt install",
-    "scss": "node-sass --watch scss -o css"
+    "postinstall": "grunt install"
   }
 }
