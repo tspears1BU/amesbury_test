@@ -1,263 +1,249 @@
-// Require external packages.
-const autoprefixer = require("autoprefixer");
-const sass = require("node-sass");
+module.exports = function (grunt) {
+	// Require external packages.
+	const autoprefixer = require("autoprefixer")
+	const sass = require("node-sass")
 
-// Set up a versioned folder for SassDoc
-const pkg = require("./package.json");
+	// 1. All configuration goes here
+	grunt.initConfig({
+		// 2. All functions go here.
+		watch: {
+			grunt: {
+				files: ["Gruntfile.js"],
+				options: {
+					reload: true,
+				},
+			},
+			scripts: {
+				files: ["js-dev/**/*.js"],
+				tasks: ["scripts"],
+				options: {
+					spawn: false,
+				},
+			},
+			styles: {
+				files: ["css-dev/**/*.scss"],
+				tasks: ["styles"],
+				options: {
+					spawn: false,
+				},
+			},
+			phplint: {
+				files: ["**/*.php"],
+				tasks: ["phplint"],
+				options: {
+					spawn: false,
+				},
+			},
+		},
+		browserify: {
+			options: {
+				watch: true,
+				browserifyOptions: {
+					debug: false,
+					transform: [["babelify"]],
+				},
+			},
+			dist: {
+				files: [
+					{
+						expand: true, // Enable dynamic expansion.
+						cwd: "js-dev/", // Src matches are relative to this path.
+						src: ["*.js"], // Actual pattern(s) to match. Targets root JS files.
+						dest: "js/", // Destination path prefix.
+					},
+				],
+			},
+		},
+		uglify: {
+			scripts: {
+				options: {
+					sourceMap: true,
+				},
+				expand: true,
+				cwd: "js/",
+				src: ["*.js"],
+				dest: "js/",
+			},
+			vendor: {
+				options: {
+					sourceMap: true,
+				},
+				expand: true,
+				cwd: "js/vendor",
+				src: ["*.js", "!*.min.js"],
+				dest: "js/vendor",
+			},
+		},
+		sass: {
+			options: {
+				outputStyle: "compressed",
+				implementation: sass,
+				sourceMap: true,
+				indentType: "space",
+				indentWidth: 2,
+				precision: "5",
+				includePaths: [
+					"node_modules/normalize-scss/sass",
+					"node_modules/mathsass/dist/",
+				],
+				bundleExec: true,
+			},
+			devl: {
+				options: {
+					outputStyle: "expanded",
+				},
+				files: {
+					"style.css": "css-dev/style.scss",
+					"ie.css": "css-dev/ie.scss",
+				},
+			},
+			prod: {
+				files: {
+					"style.min.css": "css-dev/style.scss",
+					"ie.min.css": "css-dev/ie.scss",
+					"admin/admin.css": "css-dev/admin.scss",
+				},
+			},
+		},
+		postcss: {
+			defaults: {
+				options: {
+					map: {
+						inline: false, // Save all sourcemaps as separate files.
+					},
+					processors: [
+						autoprefixer, // add vendor prefixes.
+					],
+				},
+				src: ["style.css", "style.min.css"],
+			},
+			admin: {
+				options: {
+					map: {
+						inline: false, // Save all sourcemaps as separate files.
+						annotation: "admin/", // Save to this specified directory.
+					},
+					processors: [
+						autoprefixer, // add vendor prefixes.
+					],
+				},
+				src: ["admin/admin.css"],
+			},
+		},
+		version: {
+			functions: {
+				options: {
+					prefix: "['\"]RESPONSIVE_\\w*_VERSION['\"],\\s*'",
+				},
+				src: ["functions.php"],
+			},
+			styles: {
+				options: {
+					prefix: "Version:\\s*",
+				},
+				src: ["css-dev/style.scss"],
+			},
+		},
+		copy: {
+			hooks: {
+				options: {
+					mode: true,
+				},
+				src: "hooks/post-merge",
+				dest: ".git/hooks/post-merge",
+			},
+		},
+		phplint: {
+			options: {
+				phpArgs: {
+					"-l -f": null,
+				},
+			},
+			all: {
+				src: "**/*.php",
+			},
+		},
+		addtextdomain: {
+			options: {
+				textdomain: "amesbury",
+			},
+			update_all_domains: {
+				options: {
+					updateDomains: true,
+				},
+				src: [
+					"*.php",
+					"**/*.php",
+					"!.git/**/*",
+					"!bin/**/*",
+					"!node_modules/**/*",
+					"!tests/**/*",
+					"!vendor/**/*",
+				],
+			},
+			target: {
+				files: {
+					src: [
+						"**.php",
+						"**/*.php",
+						"!node_modules/**",
+						"!node_modules/**",
+						"!bin/**",
+						"!vendor/**",
+					],
+				},
+			},
+		},
+		makepot: {
+			target: {
+				options: {
+					domainPath: "/languages",
+					potFilename: "amesbury.pot",
+					mainFile: "functions.php",
+					potHeaders: {
+						poedit: true,
+						"x-poedit-keywordslist": true,
+					},
+					type: "wp-theme",
+					updateTimestamp: true,
+				},
+			},
+		},
+		clean: {
+			languages: ["languages/*"],
+			js: ["js/**/*.js", "js/**/*.map"],
+		},
+		sasslint: {
+			target: "css-dev/**/*.scss",
+			// see .sasslintrc for options.
+		},
+	})
 
-// Get current versions of each package inside this repo
+	// 3. Where we tell Grunt we plan to use this plug-in.
+	grunt.loadNpmTasks("grunt-browserify")
+	grunt.loadNpmTasks("grunt-contrib-watch")
+	grunt.loadNpmTasks("grunt-contrib-concat")
+	grunt.loadNpmTasks("grunt-contrib-copy")
+	grunt.loadNpmTasks("grunt-contrib-uglify")
+	grunt.loadNpmTasks("grunt-postcss")
+	grunt.loadNpmTasks("grunt-sass")
+	grunt.loadNpmTasks("grunt-notify")
+	grunt.loadNpmTasks("grunt-version")
+	grunt.loadNpmTasks("grunt-phplint")
+	grunt.loadNpmTasks("grunt-wp-i18n")
+	grunt.loadNpmTasks("grunt-contrib-clean")
+	grunt.loadNpmTasks("grunt-sass-lint")
 
-const pkgBase = require("./burf-base/package.json");
-const pkgCustomizations = require("./burf-customizations/package.json");
-const pkgTheme = require("./burf-theme/package.json");
-const pkgTools = require("./burf-tools/package.json");
-
-module.exports = (grunt) => {
-  const docsVersionFilePath = `docs/${pkg.version}`;
-  const kssDocsFilePath = docsVersionFilePath + "/kss-assets/docs.css";
-  const kssDocsCustomCSSPath =
-    docsVersionFilePath + "/kss-assets/kss-custom.css";
-
-  grunt.file.mkdir(docsVersionFilePath);
-
-  require("time-grunt")(grunt);
-
-  // Configure Grunt.
-  grunt.initConfig({
-    pkg: grunt.file.readJSON("package.json"),
-    babel: {
-      options: {
-        cwd: "js-dev",
-        sourceMap: false,
-      },
-      dist: {
-        files: [
-          {
-            expand: true, // Enable dynamic expansion.
-            cwd: "js-dev/modules/", // Src matches are relative to this path.
-            src: ["*.js"], // Actual pattern(s) to match.
-            dest: "js-dev/dist/", // Destination path prefix.
-          },
-        ],
-      },
-    },
-    browserify: {
-      options: {
-        watch: true,
-        browserifyOptions: {
-          debug: false,
-          transform: [["babelify"]],
-        },
-      },
-      dist: {
-        files: [
-          {
-            expand: true, // Enable dynamic expansion.
-            cwd: "js-dev/", // Src matches are relative to this path.
-            src: ["*.js"], // Actual pattern(s) to match.
-            dest: "js/", // Destination path prefix.
-          },
-        ],
-      },
-    },
-    clean: {
-      js: ["js/**/*.js", "js/**/*.map"],
-    },
-    uglify: {
-      options: {
-        sourceMap: true,
-      },
-      dist: {
-        files: [
-          {
-            // Note: Overwrites the un-uglified version.
-            expand: true, // Enable dynamic expansion.
-            cwd: "js/", // Src matches are relative to this path.
-            src: ["*.js"], // Actual pattern(s) to match.
-            dest: "js/", // Destination path prefix.
-          },
-        ],
-      },
-    },
-    browserSync: {
-      current: {
-        bsFiles: {
-          src: docsVersionFilePath + "*.html",
-        },
-        options: {
-          watchTask: true,
-          server: {
-            baseDir: docsVersionFilePath,
-          },
-        },
-      },
-    },
-    concat: {
-      docs: {
-        files: {
-          "docs/js/docs.js": "js/*.js",
-        },
-      },
-    },
-    copy: {
-      docs: {
-        expand: true,
-        cwd: "_docs",
-        src: ["**/*.html"],
-        dest: "docs",
-      },
-    },
-    "gh-pages": {
-      options: {
-        base: "docs",
-        only: ["index.html", docsVersionFilePath],
-      },
-      src: ["**"],
-    },
-    sass: {
-      options: {
-        implementation: sass,
-        sourceMap: true,
-      },
-      docs: {
-        options: {
-          style: "compressed",
-        },
-        files: {
-          "docs/css/docs.css": "_docs/css-dev/docs.scss",
-          kssDocsFilePath: "_docs/css-dev/docs.scss",
-          kssDocsCustomCSSPath: "_docs/css-dev/kss-custom.scss",
-        },
-      },
-      build: {
-        options: {
-          style: "expanded",
-        },
-        files: {
-          "css/burf-base.css": "css-dev/burf-base.scss",
-          "css/burf-theme.css": "css-dev/burf-theme.scss",
-        },
-      },
-    },
-    postcss: {
-      defaults: {
-        options: {
-          map: {
-            inline: false, // Save all sourcemaps as separate files.
-            annotation: "css/", // Save to this specified directory.
-          },
-          processors: [
-            autoprefixer, // add vendor prefixes.
-          ],
-        },
-        src: ["css/burf-theme.css", "css/burf-base.css"],
-      },
-    },
-    watch: {
-      grunt: {
-        options: {
-          reload: true,
-        },
-        files: ["Gruntfile.js"],
-      },
-      docs: {
-        files: ["_docs/**/*.html"],
-        tasks: ["copy"],
-      },
-      scripts: {
-        files: ["js-dev/**/*.js"],
-        tasks: ["js", "concat"],
-      },
-      styles: {
-        files: ["_docs/css-dev/*.scss", "css-dev/**/*.scss"],
-        tasks: ["sass"],
-      },
-      styleguide: {
-        files: [
-          "_docs/css-dev/*.scss",
-          "css-dev/**/*.scss",
-          "css-dev/**/*.hbs",
-        ],
-        //tasks: [ 'kss' ],
-      },
-    },
-    sasslint: {
-      target: "css-dev/**/*.scss",
-      // see .sasslintrc for options.
-    },
-    kss: {
-      options: {
-        title: "Responsive Foundation " + pkg.version,
-        builder: "node_modules/id-kss-builder",
-        css: ["kss-assets/docs.css"],
-        extend: "node_modules/id-kss-builder/extend",
-        gitURL: "https://github.com/bu-ist/responsive-foundation/",
-        gitURLCSSDEV:
-          "https://github.com/bu-ist/responsive-foundation/tree/master/css-dev/",
-        customCSS: "kss-assets/kss-custom.css",
-      },
-      dist: {
-        src: ["css-dev"],
-        dest: docsVersionFilePath,
-      },
-    },
-    version: {
-      base: {
-        options: {
-          pkg: "burf-base/package.json",
-          prefix: 'burf\\-base\\"\\:\\ \\"\\^',
-        },
-        src: [
-          "package.json",
-          "burf-customizations/package.json",
-          "burf-theme/package.json",
-          "burf-tools/package.json",
-        ],
-      },
-      customizations: {
-        options: {
-          pkg: "burf-customizations/package.json",
-          prefix: 'burf\\-customizations\\"\\:\\ \\"\\^',
-        },
-        src: ["package.json"],
-      },
-      theme: {
-        options: {
-          pkg: "burf-theme/package.json",
-          prefix: 'burf\\-theme\\"\\:\\ \\"\\^',
-        },
-        src: ["package.json", "burf-customizations/package.json"],
-      },
-      tools: {
-        options: {
-          pkg: "burf-tools/package.json",
-          prefix: 'burf\\-tools\\"\\:\\ \\"\\^',
-        },
-        src: ["package.json"],
-      },
-    },
-  });
-
-  // Load Plugins.
-  grunt.loadNpmTasks("grunt-babel");
-  grunt.loadNpmTasks("grunt-browser-sync");
-  grunt.loadNpmTasks("grunt-browserify");
-  grunt.loadNpmTasks("grunt-contrib-clean");
-  grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.loadNpmTasks("grunt-contrib-copy");
-  grunt.loadNpmTasks("grunt-contrib-uglify");
-  grunt.loadNpmTasks("grunt-contrib-watch");
-  grunt.loadNpmTasks("grunt-gh-pages");
-  grunt.loadNpmTasks("grunt-sass");
-  grunt.loadNpmTasks("grunt-kss");
-  grunt.loadNpmTasks("grunt-version");
-  //grunt.registerTask( 'build', [ 'js', 'kss', 'copy' ] );
-  grunt.registerTask("build", ["js", "copy"]);
-  grunt.registerTask("deploy", ["build", "gh-pages"]);
-  grunt.registerTask("js", ["clean:js", "babel", "browserify", "uglify"]);
-  grunt.registerTask("serve", ["build", "browserSync:current", "watch"]);
-  grunt.registerTask("previewall", ["build", "browserSync:all", "watch"]);
-
-  // Register default `grunt` task.
-  grunt.registerTask("default", ["serve"]);
-};
+	// 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
+	grunt.registerTask("install", ["copy:hooks", "build"])
+	grunt.registerTask("i18n", ["clean:languages", "addtextdomain", "makepot"])
+	grunt.registerTask("styles", ["version:styles", "sass", "postcss"])
+	grunt.registerTask("scripts", [
+		"version:functions",
+		"clean:js",
+		"browserify",
+		"uglify",
+	])
+	grunt.registerTask("build", ["styles", "phplint", "scripts", "i18n"])
+	grunt.registerTask("default", ["watch"])
+}
