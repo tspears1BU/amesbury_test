@@ -1,0 +1,116 @@
+.footer-container {
+   margin: 60px auto 0;
+   max-width: 1110px;
+
+   &__top {
+      border-bottom: 1px solid $yellow;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 0 0 35px;
+   }
+
+   &__bottom {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 0 20px;
+      width: 100%;
+   }
+
+   .footer-logo {
+      flex: 0 0 126px;
+   }
+
+   .footer-menu {
+      flex: 1 0 calc(100% - 126px);
+      ul {
+         display: flex;
+         flex-direction: row;
+         margin: 0;
+         padding: 0;
+      }
+
+      li {
+         list-style: none;
+      }
+
+      a.footer-link {
+         color: $color-grayscale-0;
+         font-size: 14px;
+         font-weight: $font-semibold;
+         margin: 0 0 0 75px;
+         text-decoration: none;
+
+         &:hover,
+         &:focus {
+            text-decoration: underline;
+         }
+      }
+
+      .sub-menu {
+         display: flex;
+         flex-direction: column;
+         margin: 15px 0 0;
+
+         a.footer-link {
+            font-weight: $font-light;
+         }
+      }
+
+   }
+
+   .footer-social {
+
+      ul {
+         align-items: center;
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         margin: 0;
+         padding: 0;
+      }
+
+      li {
+         list-style: none;
+      }
+
+      a.social-link {
+         margin-right: 8px;
+      }
+   }
+
+   .footer__copywright {
+      color: $color-grayscale-0;
+      font-size: 12px;
+      font-weight: $font-light;
+   }
+
+   .footer__utility {
+      ul {
+         display: flex;
+         flex-direction: row;
+         margin: 0;
+         padding: 0;
+      }
+
+      li {
+         list-style: none;
+      }
+
+      a.utility-link {
+         color: $color-grayscale-0;
+         font-size: 12px;
+         font-weight: $font-light;
+         margin: 0 0 0 45px;
+         text-decoration: none;
+
+         &:hover,
+         &:focus {
+            text-decoration: underline;
+         }
+      }
+   }
+
+}

@@ -1,0 +1,133 @@
+.callouts {
+
+   display: flex;
+
+   @include breakpoint( $lg ) {
+      display: grid;
+      grid-gap: 4px;
+      grid-template-columns: repeat( 3, 1fr );
+      grid-template-rows: repeat( 6, 1fr );
+      margin: 0 auto 30px;
+      max-width: 1110px;
+      width: 100%;
+   }
+
+   &__article {
+      display: flex;
+      flex-direction: column;
+
+      &.box-orange {
+         background-color: $orange;
+      }
+
+      &.box-magenta {
+         background-color: $magenta;
+      }
+
+      &.box-yellow {
+         background-color: $yellow;
+      }
+
+      &-media {
+         flex: 0 1 auto;
+         height: 100%;
+         width: 100%;
+
+         img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+         }
+      }
+
+      &-content {
+         display: flex;
+         flex-direction: column;
+         flex: 1 0 auto;
+         justify-content: flex-end;
+         padding: 14px 28px;
+
+         h4 {
+            color: $color-grayscale-f;
+            font-size: 24px;
+            font-weight: $font-bold;
+            margin: 0;
+         }
+
+         p {
+            color: $color-grayscale-0;
+            font-size: 24px;
+            font-weight: $font-bold;
+            margin: 0;
+         }
+      }
+
+      &.box-01 {
+
+         @include breakpoint( $lg ) {
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 6;
+         }
+
+         img {
+            object-position: 60% 100%;
+         }
+      }
+
+      &.box-02 {
+
+      	@include breakpoint($lg) {
+      		grid-column: 2 / span 1;
+      		grid-row: 1 / span 3;
+         }
+
+         img {
+         	object-position: 20% 50%;
+         }
+      }
+
+      &.box-03 {
+
+      	@include breakpoint($lg) {
+      		grid-column: 2 / span 1;
+      		grid-row: 4 / span 3;
+         }
+
+         img {
+         	object-position: 50% 20%;
+         }
+      }
+
+      &.box-04 {
+
+      	@include breakpoint($lg) {
+      		grid-column: 3 / span 1;
+      		grid-row: 1 / span 2;
+         }
+
+         img {
+         	object-position: 60% 100%;
+         }
+      }
+
+      &.box-05 {
+
+      	@include breakpoint($lg) {
+      		grid-column: 3 / span 1;
+      		grid-row: 3 / span 2;
+         }
+
+         img {
+         	object-position: 60% 100%;
+         }
+      }
+
+      &.box-06 {
+
+      	@include breakpoint($lg) {
+      		grid-column: 3 / span 1;
+      		grid-row: 5 / span 2;
+      	}
+      }
+   }
+}
