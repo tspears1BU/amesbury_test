@@ -2719,4 +2719,226 @@ textarea {
   }
 }
 
+body {
+  background: #fff;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+}
+
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6,
+body p {
+  font-family: "Montserrat", sans-serif;
+}
+
+section {
+  margin: 0;
+}
+
+h2.section-title {
+  color: #373A3C;
+  font-size: 36px;
+  font-weight: 500;
+}
+
+.header {
+  background: #fff;
+}
+
+.header__container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1110px;
+  width: 100%;
+}
+
+.header__logo {
+  margin: 8px 20px 8px 0;
+  height: 100%;
+  width: 125.89px;
+}
+
+.header__nav ul {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+}
+
+.header__nav li {
+  list-style: none;
+}
+
+.header__nav a.header__nav-link {
+  color: #373A3C;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 15px 33px;
+  text-decoration: none;
+}
+
+.header__nav a.header__nav-link:hover, .header__nav a.header__nav-link:focus {
+  color: #DB5935;
+  text-decoration: none;
+  transition: color 250ms ease-in-out;
+}
+
+.header__cta button {
+  background-color: #DB5935;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 0;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  transition: background-color 250ms ease-in-out;
+}
+
+.header__cta button:hover, .header__cta button:focus {
+  background-color: #bc4321;
+  transition: background-color 250ms ease-in-out;
+}
+
+.header__cta svg {
+  height: 9.54px;
+  margin-left: 8px;
+  width: 8.36px;
+}
+
+.banner {
+  height: calc(100vh - 80px);
+  position: relative;
+  width: 100%;
+}
+
+.banner__media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100vw;
+}
+
+.banner__media img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 50%;
+  width: 100%;
+}
+
+.banner__content {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1110px;
+  padding: 3vw 0;
+  position: relative;
+  width: 100%;
+  z-index: 300;
+}
+
+.banner__content h1 {
+  color: #fff;
+  font-size: 84px;
+  font-weight: 800;
+  margin-bottom: 120px;
+  text-transform: uppercase;
+}
+
+.banner__content p {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.known__container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 84px 0;
+}
+
+.known__cards {
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  justify-content: space-around;
+  margin: 0;
+  max-width: 1110px;
+  width: 100%;
+}
+
+.known__box-item {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  justify-content: center;
+  margin: 20px;
+  padding: 20px;
+  position: relative;
+}
+
+.known__icon {
+  display: flex;
+  flex: 0 0 auto;
+  height: auto;
+  margin-right: 28px;
+}
+
+.known a.known__link {
+  color: #373A3C;
+  flex: 1 0 70%;
+  font-size: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.known a.known__link:hover::before, .known a.known__link:focus::before {
+  -webkit-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -moz-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -ms-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  -o-box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: box-shadow 250ms ease-in-out;
+}
+
+.known a.known__link::before {
+  -webkit-box-shadow: rgba(149, 157, 165, 0) 0px 8px 24px;
+  -moz-box-shadow: rgba(149, 157, 165, 0) 0px 8px 24px;
+  -ms-box-shadow: rgba(149, 157, 165, 0) 0px 8px 24px;
+  -o-box-shadow: rgba(149, 157, 165, 0) 0px 8px 24px;
+  box-shadow: rgba(149, 157, 165, 0) 0px 8px 24px;
+  bottom: 0;
+  content: '';
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: box-shadow 250ms ease-in-out;
+}
+
+.known a.known__link svg {
+  fill: #DB5935;
+  height: 9.54px;
+  margin-left: 8px;
+  width: 8.36px;
+}
+
 /*# sourceMappingURL=style.css.map */

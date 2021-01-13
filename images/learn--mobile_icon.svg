@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="41.38" height="69.608" viewBox="0 0 41.38 69.608">
-  <g id="learn--mobile_icon" transform="translate(-6.209 1.125)">
+<svg xmlns="http://www.w3.org/2000/svg" width="92" height="92" viewBox="0 0 92 92">
+  <g id="learn--mobile_icon" transform="translate(18.666 12.43)">
+    <circle id="Ellipse_332" data-name="Ellipse 332" cx="46" cy="46" r="46" transform="translate(-18.666 -12.43)" fill="#da3467"/>
     <g id="Group_2268" data-name="Group 2268" transform="translate(7.334)">
       <path id="Path_574" data-name="Path 574" d="M41.914,0H11.883A4.563,4.563,0,0,0,7.334,4.549V62.807a4.564,4.564,0,0,0,4.549,4.552H41.914a4.561,4.561,0,0,0,4.549-4.549V4.549A4.563,4.563,0,0,0,41.914,0ZM41.6,56.07H12.2V9.714H41.6Z" transform="translate(-7.334)" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="2.25"/>
     </g>

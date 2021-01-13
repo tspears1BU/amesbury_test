@@ -1,0 +1,77 @@
+.known {
+
+   &__container {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 84px 0;
+   }
+
+   &__cards {
+      align-items: center;
+      display: grid;
+      grid-template-columns: repeat( 3, 1fr );
+      grid-template-rows: 1fr;
+      justify-content: space-around;
+      margin: 0;
+      max-width: 1110px;
+      width: 100%;
+   }
+
+   &__box-item {
+      align-items: center;
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: row;
+      justify-content: center;
+      margin: 20px;
+      padding: 20px;
+      position: relative;
+   }
+
+   &__icon {
+      display: flex;
+      flex: 0 0 auto;
+      height: auto;
+      margin-right: 28px;
+   }
+
+   a.known__link {
+      color: $dark-navy;
+      flex: 1 0 70%;
+      font-size: 20px;
+      font-weight: $font-medium;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      &:hover,
+      &:focus {
+
+         &::before {
+            @include box-shadow( rgba(149, 157, 165, 0.2) 0px 8px 24px );
+            transition: box-shadow 250ms ease-in-out;
+         }
+      }
+
+      &::before {
+         @include box-shadow( rgba(149, 157, 165, 0) 0px 8px 24px );
+         bottom: 0;
+         content: '';
+         display: block;
+         left: 0;
+         position: absolute;
+         right: 0;
+         top: 0;
+         transition: box-shadow 250ms ease-in-out;
+      }
+
+      svg {
+         fill: $orange;
+         height: 9.54px;
+         margin-left: 8px;
+         width: 8.36px;
+      }
+
+   }
+}

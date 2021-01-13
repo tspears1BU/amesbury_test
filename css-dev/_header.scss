@@ -1,0 +1,77 @@
+.header {
+   background:  $color-grayscale-f;
+
+   &__container {
+      align-items: center;
+      display: flex;
+      flex-direction: row;
+      height: auto;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 1110px;
+      width: 100%;
+   }
+
+   &__logo {
+      margin: 8px 20px 8px 0;
+      height: 100%;
+      width: 125.89px;
+   }
+
+   &__nav {
+
+      ul {
+         align-items: center;
+         display: flex;
+         flex-direction: row;
+         justify-content: space-between;
+         margin: 0;
+         padding: 0;
+      }
+
+      li {
+         list-style: none;
+      }
+
+      a.header__nav-link {
+         color: $dark-navy;
+         font-size: 16px;
+         font-weight: $font-semibold;
+         padding: 15px 33px;
+         text-decoration: none;
+
+         &:hover,
+         &:focus {
+            color: $orange;
+            text-decoration: none;
+            transition: color 250ms ease-in-out;
+         }
+      }
+   }
+
+   &__cta {
+
+      button {
+         background-color: $orange;
+         color: $color-grayscale-f;
+         font-size: 15px;
+         font-weight: $font-regular;
+         margin: 0;
+         padding: 10px 20px;
+         text-transform: uppercase;
+         transition: background-color 250ms ease-in-out;
+
+         &:hover,
+         &:focus {
+            background-color: darken( $orange, 10%);
+            transition: background-color 250ms ease-in-out;
+         }
+      }
+
+      svg {
+         height: 9.54px;
+         margin-left: 8px;
+         width: 8.36px;
+      }
+   }
+}
