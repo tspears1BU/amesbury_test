@@ -1,5 +1,6 @@
 .header {
    background:  $color-grayscale-f;
+   position: relative;
 
    &__container {
       align-items: center;
@@ -9,7 +10,12 @@
       justify-content: space-between;
       margin: 0 auto;
       max-width: 1110px;
+      padding: 10px 15px;
       width: 100%;
+
+      @include breakpoint( $md ) {
+         padding: 0;
+      }
    }
 
    &__logo {
@@ -19,6 +25,11 @@
    }
 
    &__nav {
+      display: none;
+
+      @include breakpoint($md) {
+      	display: block;
+      }
 
       ul {
          align-items: center;
@@ -50,6 +61,11 @@
    }
 
    &__cta {
+      display: none;
+
+      @include breakpoint( $md ) {
+         display: block;
+      }
 
       button {
          background-color: $orange;
@@ -73,5 +89,124 @@
          margin-left: 8px;
          width: 8.36px;
       }
+   }
+}
+
+button.menu-trigger {
+	color: #000;
+	height: 60px;
+	width: 60px;
+	padding: 0;
+	margin: 0;
+	appearance: none;
+	border: 0;
+	background: none;
+	opacity: 0.6;
+	transition: all 250ms ease-in-out;
+
+	&:hover {
+		opacity: 1;
+		transition: all 250ms ease-in-out;
+		cursor: pointer;
+	}
+
+	&:focus {
+		outline: none;
+	}
+}
+
+svg {
+	height: 60px;
+	width: 60px;
+	stroke-width: 1px;
+}
+
+.menu-trigger.menu-closed {
+	#leftPath {
+		opacity: 0;
+		transform: rotate(-45deg);
+		transform-origin: center;
+		transition: all 125ms ease-in-out;
+	}
+
+	#rightPath {
+		opacity: 0;
+		transform: rotate(45deg);
+		transform-origin: center;
+		transition: all 125ms ease-in-out;
+	}
+
+	#midPath {
+		opacity: 0;
+	}
+
+	#circlePath {
+		stroke-dasharray: 140;
+		stroke-dashoffset: -140;
+		transition: all 250ms ease-in-out;
+	}
+
+	#bottomPath {
+		opacity: 1;
+		transform: translateY(0);
+		transition: all 125ms ease-in-out 125ms;
+	}
+
+	#topPath {
+		opacity: 1;
+		transform: translateY(0);
+		transition: all 125ms ease-in-out 125ms;
+	}
+}
+
+.menu-trigger.menu-open {
+	#circlePath {
+		stroke-dasharray: 130;
+		stroke-dashoffset: 0;
+		transition: all 250ms ease-in-out;
+	}
+
+	#leftPath {
+		opacity: 1;
+		transform: rotate(0deg);
+		transform-origin: center;
+		transition: all 125ms ease-in-out 125ms;
+	}
+
+	#rightPath {
+		opacity: 1;
+		transform: rotate(0deg);
+		transform-origin: center;
+		transition: all 125ms ease-in-out 125ms;
+	}
+
+	#bottomPath {
+		opacity: 0;
+		transform: translateY(-7px);
+		transition: all 125ms ease-in-out;
+	}
+
+	#topPath {
+		opacity: 0;
+		transform: translateY(7px);
+		transition: all 125ms ease-in-out;
+	}
+}
+
+.mobile-menu {
+   background-color: $magenta;
+   height: 100%;
+   min-height: calc( 100vh - 100px );
+   position: absolute;
+   top: 100%;
+   width: 100vw;
+   z-index: 600;
+
+   &.menu-closed {
+      left: 100vw;
+   }
+
+   &.menu-open {
+      left: 0;
    }
 }

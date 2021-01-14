@@ -9,6 +9,7 @@
       />
       <title>Imarc: A Digital Agency - Home</title>
       <link rel="stylesheet" type="text/css" href="./style.min.css" />
+      <script type="text/javascript" src="./js/script.js" ></script>
    </head>
    <body>
       <div class="wrapper">
@@ -41,7 +42,48 @@
                      </svg>
                   </button>
                </div>
+               <div class="mobile-trigger">
+                  <button class="menu-trigger menu-closed">
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 43">
+                        <g id="greenBurger">
+                        <path id="rightPath" d="M29.06,13.51,14,29" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                        <path id="leftPath" d="M29.06,29,13.89,13.51" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                        <line id="bottomPath" x1="9.29" y1="28.29" x2="33.29" y2="28.29" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+
+                        <path id="circlePath" d="M42.43,19.83A21,21,0,0,0,21.5.5h0a21,21,0,1,0,21,21l-.07-.25-9.14,0h-24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                        <line id="topPath" x1="9.29" y1="14.29" x2="33.29" y2="14.29" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" />
+                        </g>
+                     </svg>
+                  </button>
+               </div>
             </div>
+
+            <nav class="mobile-menu menu-closed">
+               <nav class="header__nav">
+                  <ul>
+                     <li>
+                        <a class="header__nav-link" href="./about/">About Us</a>
+                     </li>
+                     <li>
+                        <a class="header__nav-link" href="./blog/">Blog</a>
+                     </li>
+                     <li>
+                        <a class="header__nav-link" href="./resources/">Resources</a>
+                     </li>
+                     <li>
+                        <a class="header__nav-link" href="./contact/">Contact</a>
+                     </li>
+                  </ul>
+               </nav>
+               <div class="header__cta">
+                  <button href="./trial/">
+                     Free Trial
+                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.36 9.53">
+                       <path fill="currentColor" d="M8,4.16,1.14.1A.77.77,0,0,0,.1.38a.79.79,0,0,0-.1.4v8a.77.77,0,0,0,.75.78.76.76,0,0,0,.39-.1L8,5.37a.7.7,0,0,0,.24-1A.69.69,0,0,0,8,4.17"/>
+                     </svg>
+                  </button>
+               </div>
+            </nav>
          </header>
 
          <section class="banner">

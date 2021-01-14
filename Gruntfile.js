@@ -40,7 +40,14 @@ module.exports = function (grunt) {
 				watch: true,
 				browserifyOptions: {
 					debug: false,
-					transform: [["babelify"]],
+					transform: [
+						[
+							"babelify",
+							{
+								presets: ["@babel/preset-env"],
+							},
+						],
+					],
 				},
 			},
 			dist: {
