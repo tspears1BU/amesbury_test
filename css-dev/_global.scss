@@ -20,7 +20,13 @@ section {
 
 h2.section-title {
    color: $dark-navy;
-   font-size: 36px;
+   font-size: 28px;
    font-weight: $font-medium;
+   margin: 30px;
+   text-align: center;
+
+   @include breakpoint( $md ) {
+      font-size: 36px;
+   }
 }
 

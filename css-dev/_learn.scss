@@ -9,9 +9,13 @@
    &__cards {
       align-items: center;
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       padding: 0;
+
+      @include breakpoint( $sm ) {
+         flex-direction: row;
+      }
    }
 
    &__box-item {

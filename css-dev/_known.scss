@@ -10,31 +10,44 @@
 
    &__cards {
       align-items: center;
-      display: grid;
-      grid-template-columns: repeat( 3, 1fr );
-      grid-template-rows: 1fr;
+      display: flex;
+      flex-direction: column;
       justify-content: space-around;
       margin: 0;
       max-width: 1110px;
       width: 100%;
+
+      @include breakpoint( $md ) {
+         display: grid;
+         grid-template-columns: repeat(3, 1fr);
+         grid-template-rows: 1fr;
+      }
    }
 
    &__box-item {
       align-items: center;
       display: flex;
       flex: 0 0 auto;
-      flex-direction: row;
+      flex-direction: column;
       justify-content: center;
       margin: 20px;
       padding: 20px;
       position: relative;
+
+      @include breakpoint( $md ) {
+         flex-direction: row;
+      }
    }
 
    &__icon {
       display: flex;
       flex: 0 0 auto;
       height: auto;
-      margin-right: 28px;
+      margin: 0 0 30px;
+
+      @include breakpoint( $md ) {
+         margin: 0 28px 0 0;
+      }
    }
 
    a.known__link {
@@ -42,8 +55,13 @@
       flex: 1 0 70%;
       font-size: 20px;
       font-weight: $font-medium;
+      text-align: center;
       text-decoration: none;
       text-transform: uppercase;
+
+      @include breakpoint( $md ) {
+         text-align: left;
+      }
 
       &:hover,
       &:focus {

@@ -1,20 +1,34 @@
 .callouts {
 
    display: flex;
+   flex-direction: column;
 
-   @include breakpoint( $lg ) {
+   @include breakpoint ( $sm ) {
       display: grid;
       grid-gap: 4px;
-      grid-template-columns: repeat( 3, 1fr );
-      grid-template-rows: repeat( 6, 1fr );
+      grid-template-columns: repeat( 2, 1fr );
       margin: 0 auto 30px;
       max-width: 1110px;
       width: 100%;
    }
 
+   @include breakpoint ( $md ) {
+      grid-template-rows: repeat( 4, 1fr );
+   }
+
+   @include breakpoint( $lg ) {
+      grid-template-columns: repeat( 3, 1fr );
+      grid-template-rows: repeat( 6, 1fr );
+   }
+
    &__article {
       display: flex;
       flex-direction: column;
+      margin: 0 0 10px;
+
+      @include breakpoint( $sm ) {
+         margin: 0;
+      }
 
       &.box-orange {
          background-color: $orange;
@@ -28,10 +42,22 @@
          background-color: $yellow;
       }
 
+      &.box-no-media {
+         padding: 160px 0;
+
+         @include breakpoint( $md ) {
+            padding: 0;
+         }
+      }
+
       &-media {
          flex: 0 1 auto;
-         height: 100%;
+         height: 320px;
          width: 100%;
+
+         @include breakpoint( $md ) {
+            height: 100%;
+         }
 
          img {
             height: 100%;
@@ -64,8 +90,12 @@
 
       &.box-01 {
 
-         @include breakpoint( $lg ) {
+         @include breakpoint( $md ) {
             grid-column: 1 / span 1;
+            grid-row: 1 / span 2;
+         }
+
+         @include breakpoint( $lg ) {
             grid-row: 1 / span 6;
          }
 
@@ -76,8 +106,12 @@
 
       &.box-02 {
 
+         @include breakpoint($md) {
+         	grid-column: 2 / span 1;
+         	grid-row: 1 / span 1;
+         }
+
       	@include breakpoint($lg) {
-      		grid-column: 2 / span 1;
       		grid-row: 1 / span 3;
          }
 
@@ -88,8 +122,12 @@
 
       &.box-03 {
 
+         @include breakpoint($md) {
+         	grid-column: 2 / span 1;
+         	grid-row: 2 / span 1;
+         }
+
       	@include breakpoint($lg) {
-      		grid-column: 2 / span 1;
       		grid-row: 4 / span 3;
          }
 
@@ -99,6 +137,11 @@
       }
 
       &.box-04 {
+
+         @include breakpoint($md) {
+         	grid-column: 1 / span 1;
+         	grid-row: 3 / span 1;
+         }
 
       	@include breakpoint($lg) {
       		grid-column: 3 / span 1;
@@ -112,17 +155,31 @@
 
       &.box-05 {
 
+         @include breakpoint($md) {
+         	grid-column: 2 / span 1;
+         	grid-row: 3 / span 2;
+         }
+
       	@include breakpoint($lg) {
       		grid-column: 3 / span 1;
       		grid-row: 3 / span 2;
          }
 
          img {
-         	object-position: 60% 100%;
+            object-position: 80% 100%;
+
+            @include breakpoint( $lg ) {
+               object-position: 60% 100%;
+            }
          }
       }
 
       &.box-06 {
+
+         @include breakpoint($md) {
+         	grid-column: 1 / span 1;
+         	grid-row: 4 / span 1;
+         }
 
       	@include breakpoint($lg) {
       		grid-column: 3 / span 1;
