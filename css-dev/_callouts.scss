@@ -25,6 +25,33 @@
       display: flex;
       flex-direction: column;
       margin: 0 0 10px;
+      position: relative;
+      transition: background-color 750ms ease-out;
+
+      &:hover,
+      &:focus {
+
+         &.box-magenta {
+            background-color: darken( $magenta, 10% );
+            transition: background-color 750ms ease-out;
+         }
+
+         &.box-orange {
+         	background-color: darken($orange, 10%);
+         	transition: background-color 750ms ease-out;
+         }
+
+         &.box-yellow {
+         	background-color: darken($yellow, 10%);
+         	transition: background-color 750ms ease-out;
+         }
+
+
+         .callouts__article-media img {
+            opacity: 0.3;
+            transition: opacity 750ms ease-out;
+         }
+      }
 
       @include breakpoint( $sm ) {
          margin: 0;
@@ -62,6 +89,7 @@
          img {
             height: 100%;
             object-fit: cover;
+            transition: opacity 750ms ease-out;
             width: 100%;
          }
       }
@@ -73,11 +101,27 @@
          justify-content: flex-end;
          padding: 14px 28px;
 
-         h4 {
+         a.callouts_article-link {
             color: $color-grayscale-f;
             font-size: 24px;
             font-weight: $font-bold;
             margin: 0;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+               color: $color-grayscale-f;
+               text-decoration: none;
+            }
+
+            &::before {
+            	bottom: 0;
+            	content: '';
+            	left: 0;
+            	position: absolute;
+            	right: 0;
+            	top: 0;
+            }
          }
 
          p {
